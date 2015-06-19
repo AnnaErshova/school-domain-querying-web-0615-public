@@ -18,8 +18,11 @@ class Student
     DB[:conn].execute(sql)
   end
 
-  def self.drop_table
-    sql = "DROP TABLE IF EXISTS students"
+  def self.drop_table # Use IF EXISTS to prevent an error from occurring for tables that do not exist. A NOTE is generated for each nonexistent table whe
+    sql = <<-SQL
+      DROP TABLE IF EXISTS students
+    SQL
+
     DB[:conn].execute(sql)
   end
 
@@ -60,6 +63,7 @@ class Student
     DB[:conn].execute(sql,name).map do |row|
       self.new_from_db(row)
     end.first
+    # shouldn't this be execute(sql,id?)
   end
 
   def attribute_values
@@ -88,7 +92,7 @@ class Student
   end
 
   def persisted?
-    !!self.id
+    !!self.id # double negation turns into true
   end
 
   def save

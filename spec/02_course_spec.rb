@@ -118,7 +118,7 @@ describe Course do
       dot_net.insert
 
       dot_net.name = "Underwater Basket Weaving"
-      dot_net.department_id = 2
+      dot_net.department_id = '2'
       original_id = dot_net.id
 
       dot_net.update
@@ -129,7 +129,7 @@ describe Course do
       underwater_from_db = Course.find_by_name("Underwater Basket Weaving")
       expect(underwater_from_db).to be_an_instance_of(Course)
       expect(underwater_from_db.name).to eq("Underwater Basket Weaving")
-      expect(underwater_from_db.department_id).to eq(2)
+      expect(underwater_from_db.department_id).to eq('2')
       expect(underwater_from_db.id).to eq(original_id)
     end
   end
